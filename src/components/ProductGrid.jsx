@@ -3,9 +3,9 @@ import ProductCard from "./ProductCard";
 
 const PRICE_RANGES = [
   { label: "All", min: 0, max: Infinity },
-  { label: "Under ₹2,000", min: 0, max: 2000 },
-  { label: "₹2,000 – ₹5,000", min: 2000, max: 5000 },
   { label: "Above ₹5,000", min: 5000, max: Infinity },
+  { label: "₹2,000 – ₹5,000", min: 2000, max: 5000 },
+  { label: "Under ₹2,000", min: 0, max: 2000 },
 ];
 
 export default function ProductGrid({ products, searchQuery }) {
