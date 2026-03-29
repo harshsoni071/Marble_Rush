@@ -1,15 +1,16 @@
 export const products = [
   {
     id: 1,
-    title: "Hape Quadrilla Marble Run Twist & Rail Set",
-    price: "₹4,299",
-    originalPrice: "₹5,999",
-    image: "https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=400&fit=crop",
-    amazonLink: "https://www.amazon.in/s?k=Hape+Quadrilla+Marble+Run+Twist+Rail",
-    rating: 4.8,
+    title: "Rhode Island Novelty 80 Piece Marble Run",
+    price: "$11.75",
+    originalPrice: "$12.47",
+    image: "https://m.media-amazon.com/images/I/61DZ8vvCwUL._AC_SL1000_.jpg",
+    amazonLink: "https://amzn.to/4cc6mrl",
+    rating: 3.0,
     reviews: 3420,
     category: "Marble Run Sets",
     badge: "Best Seller",
+    currency: "USD",
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const products = [
     reviews: 2180,
     category: "Marble Run Sets",
     badge: "Top Rated",
+    currency: "INR",
   },
   {
     id: 3,
@@ -34,6 +36,7 @@ export const products = [
     reviews: 1890,
     category: "Marble Run Sets",
     badge: "New",
+    currency: "INR",
   },
   {
     id: 4,
@@ -46,6 +49,7 @@ export const products = [
     reviews: 5670,
     category: "Marble Maze",
     badge: "Best Seller",
+    currency: "INR",
   },
   {
     id: 5,
@@ -58,6 +62,7 @@ export const products = [
     reviews: 4230,
     category: "Marble Puzzle",
     badge: "Top Rated",
+    currency: "INR",
   },
   {
     id: 6,
@@ -70,6 +75,7 @@ export const products = [
     reviews: 7850,
     category: "STEM Marble Run",
     badge: "Deal",
+    currency: "INR",
   },
   {
     id: 7,
@@ -82,6 +88,7 @@ export const products = [
     reviews: 3100,
     category: "STEM Marble Run",
     badge: "Hot Deal",
+    currency: "INR",
   },
   {
     id: 8,
@@ -94,6 +101,7 @@ export const products = [
     reviews: 9870,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 9,
@@ -106,6 +114,7 @@ export const products = [
     reviews: 6540,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 10,
@@ -118,6 +127,7 @@ export const products = [
     reviews: 4320,
     category: "Marble Run Sets",
     badge: "Popular",
+    currency: "INR",
   },
   {
     id: 11,
@@ -130,6 +140,7 @@ export const products = [
     reviews: 12400,
     category: "LEGO Marble",
     badge: null,
+    currency: "INR",
   },
   {
     id: 12,
@@ -142,6 +153,7 @@ export const products = [
     reviews: 2780,
     category: "STEM Marble Run",
     badge: "Deal",
+    currency: "INR",
   },
   {
     id: 13,
@@ -154,6 +166,7 @@ export const products = [
     reviews: 1560,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 14,
@@ -166,6 +179,7 @@ export const products = [
     reviews: 3890,
     category: "Wooden Marble Run",
     badge: "Best Seller",
+    currency: "INR",
   },
   {
     id: 15,
@@ -178,6 +192,7 @@ export const products = [
     reviews: 7230,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 16,
@@ -190,6 +205,7 @@ export const products = [
     reviews: 5430,
     category: "STEM Marble Run",
     badge: "Top Rated",
+    currency: "INR",
   },
   {
     id: 17,
@@ -202,6 +218,7 @@ export const products = [
     reviews: 18900,
     category: "Marbles",
     badge: "Hot Deal",
+    currency: "INR",
   },
   {
     id: 18,
@@ -214,6 +231,7 @@ export const products = [
     reviews: 4560,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 19,
@@ -226,6 +244,7 @@ export const products = [
     reviews: 2340,
     category: "Marble Stunt",
     badge: null,
+    currency: "INR",
   },
   {
     id: 20,
@@ -238,6 +257,7 @@ export const products = [
     reviews: 6780,
     category: "Wooden Marble Run",
     badge: null,
+    currency: "INR",
   },
   {
     id: 21,
@@ -250,6 +270,7 @@ export const products = [
     reviews: 3210,
     category: "Magnetic Marble Run",
     badge: "Popular",
+    currency: "INR",
   },
   {
     id: 22,
@@ -262,6 +283,7 @@ export const products = [
     reviews: 1890,
     category: "Marble Run Sets",
     badge: "Premium",
+    currency: "INR",
   },
   {
     id: 23,
@@ -274,6 +296,7 @@ export const products = [
     reviews: 2100,
     category: "Marble Run Sets",
     badge: "Deal",
+    currency: "INR",
   },
   {
     id: 24,
@@ -286,6 +309,7 @@ export const products = [
     reviews: 8900,
     category: "STEM Marble Run",
     badge: null,
+    currency: "INR",
   },
   {
     id: 25,
@@ -298,6 +322,7 @@ export const products = [
     reviews: 4320,
     category: "Wooden Marble Run",
     badge: null,
+    currency: "INR",
   },
   {
     id: 26,
@@ -310,6 +335,7 @@ export const products = [
     reviews: 5600,
     category: "Marble Run Accessories",
     badge: null,
+    currency: "INR",
   },
   {
     id: 27,
@@ -322,6 +348,7 @@ export const products = [
     reviews: 3450,
     category: "STEM Marble Run",
     badge: "New",
+    currency: "INR",
   },
   {
     id: 28,
@@ -334,6 +361,7 @@ export const products = [
     reviews: 7800,
     category: "Marble Run Sets",
     badge: "Deal",
+    currency: "INR",
   },
   {
     id: 29,
@@ -346,6 +374,7 @@ export const products = [
     reviews: 2300,
     category: "Marble Run Sets",
     badge: "Premium",
+    currency: "INR",
   },
   {
     id: 30,
@@ -358,6 +387,7 @@ export const products = [
     reviews: 1890,
     category: "Electric Marble Run",
     badge: "New",
+    currency: "INR",
   },
   {
     id: 31,
@@ -370,6 +400,7 @@ export const products = [
     reviews: 9800,
     category: "Marble Run Sets",
     badge: "Budget Pick",
+    currency: "INR",
   },
   {
     id: 32,
@@ -382,6 +413,7 @@ export const products = [
     reviews: 6700,
     category: "STEM Marble Run",
     badge: null,
+    currency: "INR",
   },
   {
     id: 33,
@@ -394,6 +426,7 @@ export const products = [
     reviews: 5670,
     category: "Marble Run Sets",
     badge: "Top Rated",
+    currency: "INR",
   },
   {
     id: 34,
@@ -406,6 +439,7 @@ export const products = [
     reviews: 4500,
     category: "Marble Run Sets",
     badge: "Deal",
+    currency: "INR",
   },
   {
     id: 35,
@@ -418,6 +452,7 @@ export const products = [
     reviews: 14300,
     category: "Marble Puzzle",
     badge: null,
+    currency: "INR",
   },
   {
     id: 36,
@@ -430,6 +465,7 @@ export const products = [
     reviews: 3210,
     category: "STEM Marble Run",
     badge: "Popular",
+    currency: "INR",
   },
   {
     id: 37,
@@ -442,6 +478,7 @@ export const products = [
     reviews: 8700,
     category: "Wooden Marble Run",
     badge: null,
+    currency: "INR",
   },
   {
     id: 38,
@@ -454,6 +491,7 @@ export const products = [
     reviews: 4100,
     category: "Marble Run Sets",
     badge: null,
+    currency: "INR",
   },
   {
     id: 39,
@@ -466,6 +504,7 @@ export const products = [
     reviews: 5900,
     category: "Magnetic Marble Run",
     badge: "Best Seller",
+    currency: "INR",
   },
   {
     id: 40,
@@ -478,6 +517,7 @@ export const products = [
     reviews: 2800,
     category: "Marble Run Sets",
     badge: "Premium",
+    currency: "INR",
   },
 ];
 

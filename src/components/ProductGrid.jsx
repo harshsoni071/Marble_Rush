@@ -1,47 +1,89 @@
 import { useState, useMemo } from "react";
 import ProductCard from "./ProductCard";
 
-const PRICE_RANGES = [
-  { label: "All", min: 0, max: Infinity },
-  { label: "Above ₹5,000", min: 5000, max: Infinity },
-  { label: "₹2,000 – ₹5,000", min: 2000, max: 5000 },
-  { label: "Under ₹2,000", min: 0, max: 2000 },
-];
+const PRICE_RANGES = {
+  INR: [
+    { label: "All", min: 0, max: Infinity },
+    { label: "Above ₹5,000", min: 5000, max: Infinity },
+    { label: "₹2,000 – ₹5,000", min: 2000, max: 5000 },
+    { label: "Under ₹2,000", min: 0, max: 2000 },
+  ],
+  USD: [
+    { label: "All", min: 0, max: Infinity },
+    { label: "Above $50", min: 50, max: Infinity },
+    { label: "$20 – $50", min: 20, max: 50 },
+    { label: "Under $20", min: 0, max: 20 },
+  ],
+  ALL: [
+    { label: "All", min: 0, max: Infinity },
+    { label: "Above ₹5,000", min: 5000, max: Infinity },
+    { label: "₹2,000 – ₹5,000", min: 2000, max: 5000 },
+    { label: "Under ₹2,000", min: 0, max: 2000 },
+  ],
+};
 
 export default function ProductGrid({ products, searchQuery }) {
   const [sortBy, setSortBy] = useState("default");
   const [priceRange, setPriceRange] = useState(0);
+  const [currency, setCurrency] = useState("ALL");
+
+  // When currency changes, reset price range to "All"
+  const handleCurrencyChange = (val) => {
+    setCurrency(val);
+    setPriceRange(0);
+  };
+
+  const activePriceRanges = PRICE_RANGES[currency];
 
   const filtered = useMemo(() => {
-    const { min, max } = PRICE_RANGES[priceRange];
+    const { min, max } = activePriceRanges[priceRange];
 
     let list = products.filter((p) => {
+      // Search filter
       const matchesSearch = p.title
         .toLowerCase()
         .includes(searchQuery.toLowerCase());
-      const price = parseInt(p.price.replace(/[₹,]/g, ""));
-      const matchesPrice = price >= min && price < max;
-      return matchesSearch && matchesPrice;
+
+      // Currency filter
+      const matchesCurrency =
+        currency === "ALL" || p.currency === currency;
+
+      // Price range filter
+      let matchesPrice = true;
+      if (priceRange !== 0) {
+        if (p.currency === "INR" && (currency === "INR" || currency === "ALL")) {
+          const price = parseInt(p.price.replace(/[₹,]/g, ""));
+          matchesPrice = price >= min && price < max;
+        } else if (p.currency === "USD" && currency === "USD") {
+          const price = parseFloat(p.price.replace(/[$,]/g, ""));
+          matchesPrice = price >= min && price < max;
+        } else {
+          // In "ALL" mode with price filter active, hide USD products
+          matchesPrice = p.currency !== "USD";
+        }
+      }
+
+      return matchesSearch && matchesCurrency && matchesPrice;
     });
 
     if (sortBy === "price-asc") {
       list = [...list].sort(
         (a, b) =>
-          parseInt(a.price.replace(/[₹,]/g, "")) -
-          parseInt(b.price.replace(/[₹,]/g, ""))
+          parseFloat(a.price.replace(/[₹,$,]/g, "")) -
+          parseFloat(b.price.replace(/[₹,$,]/g, ""))
       );
     } else if (sortBy === "price-desc") {
       list = [...list].sort(
         (a, b) =>
-          parseInt(b.price.replace(/[₹,]/g, "")) -
-          parseInt(a.price.replace(/[₹,]/g, ""))
+          parseFloat(b.price.replace(/[₹,$,]/g, "")) -
+          parseFloat(a.price.replace(/[₹,$,]/g, ""))
       );
     } else if (sortBy === "rating") {
       list = [...list].sort((a, b) => b.rating - a.rating);
     }
 
     return list;
-  }, [products, searchQuery, sortBy, priceRange]);
+  }, [products, searchQuery, sortBy, priceRange, currency, activePriceRanges]);
 
   return (
     <section id="products" className="py-12 sm:py-20 bg-white">
@@ -65,10 +107,12 @@ export default function ProductGrid({ products, searchQuery }) {
         <div className="bg-gray-50 border border-gray-100 rounded-2xl p-3 sm:p-4 mb-6 sm:mb-8">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
 
-            {/* Price Range Tabs — horizontally scrollable on mobile */}
-            <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2"
-              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-              {PRICE_RANGES.map((range, idx) => (
+            {/* Price Range Tabs — dynamic based on selected currency */}
+            <div
+              className="grid grid-cols-2 gap-2 sm:flex sm:items-center sm:gap-2"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
+              {activePriceRanges.map((range, idx) => (
                 <button
                   key={range.label}
                   onClick={() => setPriceRange(idx)}
@@ -86,17 +130,38 @@ export default function ProductGrid({ products, searchQuery }) {
             {/* Divider — mobile only */}
             <div className="block sm:hidden h-px bg-gray-200" />
 
-            {/* Bottom row on mobile: count left, sort right */}
-            <div className="flex items-center justify-between sm:justify-end gap-3 sm:flex-shrink-0">
+            {/* Right side: Currency Toggle + Sort */}
+            <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 sm:flex-shrink-0">
 
-              {/* Product count — mobile left, desktop separate */}
+              {/* Product count — mobile only */}
               <p className="text-xs text-gray-400 sm:hidden">
                 <span className="font-semibold text-gray-600">{filtered.length}</span> products
               </p>
 
+              {/* Currency Toggle Pill */}
+              <div className="flex items-center bg-white border border-gray-200 rounded-xl p-0.5 gap-0.5">
+                {[
+                  { value: "ALL", label: "All" },
+                  { value: "USD", label: "$ USD" },
+                  { value: "INR", label: "₹ INR" },
+                ].map((opt) => (
+                  <button
+                    key={opt.value}
+                    onClick={() => handleCurrencyChange(opt.value)}
+                    className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-xs font-bold transition-all duration-200 whitespace-nowrap ${
+                      currency === opt.value
+                        ? "bg-amber-600 text-white shadow-sm"
+                        : "text-gray-500 hover:text-amber-700"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+
               {/* Sort dropdown */}
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap">
+                <span className="text-xs sm:text-sm text-gray-500 font-medium whitespace-nowrap hidden sm:inline">
                   Sort:
                 </span>
                 <select
@@ -117,6 +182,11 @@ export default function ProductGrid({ products, searchQuery }) {
         {/* Result Count — desktop only */}
         <p className="hidden sm:block text-sm text-gray-400 mb-6">
           Showing <span className="font-semibold text-gray-600">{filtered.length}</span> products
+          {currency !== "ALL" && (
+            <span className="ml-2 text-amber-600 font-semibold">
+              · {currency === "INR" ? "₹ INR only" : "$ USD only"}
+            </span>
+          )}
         </p>
 
         {/* Grid */}
@@ -127,7 +197,7 @@ export default function ProductGrid({ products, searchQuery }) {
               No products found
             </h3>
             <p className="text-gray-600 text-sm sm:text-base">
-              Try a different search term or price range.
+              Try a different search term, price range, or currency.
             </p>
           </div>
         ) : (
