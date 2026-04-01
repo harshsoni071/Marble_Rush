@@ -44,9 +44,9 @@ export default function ProductCard({ product }) {
 
   const discount = product.originalPrice
     ? Math.round(
-        ((parseInt(product.originalPrice.replace(/[₹,]/g, "")) -
-          parseInt(product.price.replace(/[₹,]/g, ""))) /
-          parseInt(product.originalPrice.replace(/[₹,]/g, ""))) *
+        ((parseFloat(product.originalPrice.replace(/[₹,$,]/g, "")) -
+          parseFloat(product.price.replace(/[₹,$,]/g, ""))) /
+          parseFloat(product.originalPrice.replace(/[₹,$,]/g, ""))) *
           100
       )
     : null;
@@ -55,7 +55,7 @@ export default function ProductCard({ product }) {
     <div
       className="group relative bg-white border border-gray-200 rounded-2xl overflow-hidden cursor-pointer 
       hover:border-amber-600/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-gray-300/50 
-      transition-all duration-400 flex flex-col h-[420px]"
+      transition-all duration-400 flex flex-col"
       onClick={handleClick}
     >
       {/* Badge */}
@@ -70,23 +70,22 @@ export default function ProductCard({ product }) {
       )}
 
       {/* Discount */}
-      {discount && (
+      {discount > 0 && (
         <div className="absolute top-3 right-3 z-10 px-2 py-1 bg-red-500/90 backdrop-blur text-white rounded-lg text-xs font-bold">
           -{discount}%
         </div>
       )}
 
-      {/* Image */}
-      <div className="relative overflow-hidden bg-gray-100 h-48 flex-shrink-0">
+      {/* Image — fixed height, object-contain so full image is always visible */}
+      <div className="relative bg-gray-50 flex-shrink-0" style={{ height: "180px" }}>
         <img
           src={product.image}
           alt={product.title}
           loading="lazy"
           onError={(e) => {
-            e.target.src =
-              "https://via.placeholder.com/300x200?text=No+Image";
+            e.target.src = "https://via.placeholder.com/300x200?text=No+Image";
           }}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+          className="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-700 ease-out"
         />
       </div>
 
@@ -98,7 +97,7 @@ export default function ProductCard({ product }) {
         </span>
 
         {/* Title */}
-        <h3 className="text-gray-900 text-sm font-semibold mt-1 mb-2 leading-snug line-clamp-2 overflow-hidden">
+        <h3 className="text-gray-900 text-sm font-semibold mt-1 mb-2 leading-snug line-clamp-2">
           {product.title}
         </h3>
 
@@ -122,7 +121,7 @@ export default function ProductCard({ product }) {
           )}
         </div>
 
-        {/* Button */}
+        {/* Button — always at bottom */}
         <button
           onClick={(e) => {
             e.stopPropagation();
