@@ -102,11 +102,11 @@ export default function Navbar({ searchQuery, setSearchQuery }) {
                 className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 text-sm focus:outline-none"
               />
             </div>
-            {["products", "why-us", "testimonials"].map((id) => (
+            {/* {["products", "why-us", "testimonials"].map((id) => (
               <button key={id} onClick={() => scrollTo(id)} className="block w-full text-left text-gray-700 py-2 text-sm font-medium capitalize">
                 {id === "why-us" ? "Why Us" : id.charAt(0).toUpperCase() + id.slice(1)}
               </button>
-            ))}
+            ))} */}
           </div>
         )}
       </div>
